@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+      Content Security Policy:
+      - default-src 'self': Allows loading resources from the same origin (the app itself).
+      - script-src 'self': Allows inline scripts and scripts from the same origin.
+      - style-src 'self' 'unsafe-inline': Allows CSS files from 'self' and inline styles.
+        (Consider 'unsafe-inline' carefully; for this static manual, it's for the <style>html{scroll-behavior:smooth;}</style>)
+      - img-src 'self' data:: Allows images from self and data URIs.
+      Adjust as needed if you embed external resources, but for a local manual, 'self' is safest.
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; font-src 'self'; object-src 'none'; form-action 'none';">
+    <title>EEEHUB Application Manual</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Smooth scrolling behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <header id="main-header">
+        <h1>EEEHUB Application Manual</h1>
+    </header>
+    <div id="layout-container">
+        <aside id="toc-container">
+            <nav aria-labelledby="toc-heading">
+                <h2 id="toc-heading">Table of Contents</h2>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#installation">Installation</a>
+                        <ul>
+                            <li><a href="#prerequisites">Prerequisites</a></li>
+                            <li><a href="#getting-the-code">Getting the Code</a></li>
+                            <li><a href="#installing-dependencies">Installing Dependencies</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#setup">Setup</a>
+                        <ul>
+                            <li><a href="#environment-variables">Environment Variables</a></li>
+                            <li><a href="#database-setup">Database Setup</a></li>
+                            <li><a href="#api-key-configuration">API Key Configuration</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#running-the-application">Running the Application</a>
+                        <ul>
+                            <li><a href="#development-mode">Development Mode</a></li>
+                            <li><a href="#production-mode">Production Mode</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#core-features-main">Core Features</a>
+                        <ul>
+                            <li><a href="#dashboard">Dashboard</a></li>
+                            <li><a href="#data-import">Data Import</a></li>
+                            <li><a href="#inventory-management">Inventory Management</a></li>
+                            <li><a href="#customer-service">Customer Service</a></li>
+                            <li><a href="#ai-insights">AI Insights</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#how-to-use-each-feature">How to Use Each Feature</a>
+                        <ul>
+                            <li><a href="#using-the-dashboard">Using the Dashboard</a></li>
+                            <li><a href="#importing-data">Importing Data</a></li>
+                            <li><a href="#managing-inventory">Managing Inventory</a></li>
+                            <li><a href="#handling-customer-service-issues">Handling Customer Service Issues</a></li>
+                            <li><a href="#generating-ai-insights">Generating AI Insights</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#troubleshooting">Troubleshooting</a></li>
+                    <li><a href="#system-architecture-and-vision">System Architecture and Vision</a>
+                        <ul>
+                            <li><a href="#data-storage-backend">8.1. Data Storage & Backend</a></li>
+                            <li><a href="#etl-backend">8.2. ETL Backend</a></li>
+                            <li><a href="#frontend-application">8.3. Frontend Application</a></li>
+                            <li><a href="#key-features-benefits">8.4. Key Features & Benefits</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contribution">Contribution</a></li>
+                    <li><a href="#license">License</a></li>
+                </ol>
+            </nav>
+        </aside>
+
+        <main id="manual-content">
+            <section id="introduction" aria-labelledby="introduction-heading">
+                <h2 id="introduction-heading">1. Introduction</h2>
+                <p>EEEHUB is a comprehensive application designed to provide insights and management tools for e-commerce operations. It includes features for data import, inventory management, customer service tracking, and AI-driven analytics.</p>
+            </section>
+
+            <section id="installation" aria-labelledby="installation-heading">
+                <h2 id="installation-heading">2. Installation</h2>
+                <h3 id="prerequisites">Prerequisites</h3>
+                <p>Before installing EEEHUB, ensure you have the following installed on your system:</p>
+                <ul>
+                    <li>Node.js (LTS version recommended)</li>
+                    <li>npm or yarn package manager</li>
+                    <li>Git</li>
+                </ul>
+                <h3 id="getting-the-code">Getting the Code</h3>
+                <p>Clone the EEEHUB repository from its source:</p>
+                <pre><code class="language-bash">git clone &lt;repository_url&gt;
+cd eeehub</code></pre>
+                <h3 id="installing-dependencies">Installing Dependencies</h3>
+                <p>Navigate to the project directory and install the necessary dependencies:</p>
+                <pre><code class="language-bash">npm install
+# or
+yarn install</code></pre>
+            </section>
+
+            <section id="setup" aria-labelledby="setup-heading">
+                <h2 id="setup-heading">3. Setup</h2>
+                <h3 id="environment-variables">Environment Variables</h3>
+                <p>Create a <code>.env.local</code> file in the root of the project. This file will contain your environment-specific configuration. Refer to a <code>.env.example</code> file (if provided) for the required variables. Common variables might include API keys, database URLs, etc.</p>
+                <pre><code class="language-ini"># Example .env.local
+DATABASE_URL="your_database_url"
+API_KEY="your_api_key"
+NEXT_PUBLIC_ANALYTICS_ID="your_analytics_id"</code></pre>
+                <h3 id="database-setup">Database Setup (If applicable)</h3>
+                <p>If the application requires a database, follow the specific database setup instructions (e.g., running migrations, seeding initial data). Consult any documentation or scripts provided for database setup.</p>
+                <h3 id="api-key-configuration">API Key Configuration (If applicable)</h3>
+                <p>Some features might require external API keys. Ensure these are correctly configured in your <code>.env.local</code> file as per the requirements of each feature.</p>
+            </section>
+
+            <section id="running-the-application" aria-labelledby="running-app-heading">
+                <h2 id="running-app-heading">4. Running the Application</h2>
+                <h3 id="development-mode">Development Mode</h3>
+                <p>To run the application in development mode with hot-reloading:</p>
+                <pre><code class="language-bash">npm run dev
+# or
+yarn dev</code></pre>
+                <p>The application will typically be accessible at <code>http://localhost:3000</code>.</p>
+                <h3 id="production-mode">Production Mode</h3>
+                <p>To build the application for production and run it:</p>
+                <pre><code class="language-bash">npm run build
+# or
+yarn build
+
+npm start
+# or
+yarn start</code></pre>
+            </section>
+
+            <section id="core-features-main" aria-labelledby="core-features-heading">
+                <h2 id="core-features-heading">5. Core Features</h2>
+                <p>EEEHUB offers the following core features:</p>
+                <ul>
+                    <li id="dashboard"><strong>Dashboard:</strong> Provides an overview of key e-commerce metrics and visualizations.</li>
+                    <li id="data-import"><strong>Data Import:</strong> Allows importing sales, inventory, and customer data from various sources (e.g., CSV, APIs).</li>
+                    <li id="inventory-management"><strong>Inventory Management:</strong> Tools to track and manage product inventory levels.</li>
+                    <li id="customer-service"><strong>Customer Service:</strong> Features to log and track customer issues and interactions.</li>
+                    <li id="ai-insights"><strong>AI Insights:</strong> Generates data-driven insights using AI models.</li>
+                </ul>
+            </section>
+
+            <section id="how-to-use-each-feature" aria-labelledby="how-to-use-heading">
+                <h2 id="how-to-use-heading">6. How to Use Each Feature</h2>
+                <h3 id="using-the-dashboard">Using the Dashboard</h3>
+                <p>The Dashboard is the first page you see upon logging in (if applicable). It displays charts and summary statistics related to your e-commerce performance. Use the filter controls (if available) to refine the data displayed.</p>
+                <h3 id="importing-data">Importing Data</h3>
+                <p>Navigate to the "Data Import" section. You will likely find options to:</p>
+                <ul>
+                    <li><strong>Upload CSV files:</strong> Click the "CSV Upload" button and select your data file. Ensure your CSV file is formatted correctly according to the application's requirements (refer to any provided templates).</li>
+                    <li><strong>Connect to APIs:</strong> If API connections are available, follow the instructions to configure your API credentials and select the data you wish to import.</li>
+                    <li><strong>Connect to Cloud Storage (e.g., Google Drive):</strong> Follow the authentication steps to connect your cloud storage account and select files for import.</li>
+                </ul>
+                <h3 id="managing-inventory">Managing Inventory</h3>
+                <p>The "Inventory" section allows you to:</p>
+                <ul>
+                    <li><strong>View Inventory Summary:</strong> See a summary of your current stock levels.</li>
+                    <li><strong>Update Stock:</strong> Manually adjust inventory quantities (if the feature is available).</li>
+                    <li><strong>Track Product Movement:</strong> Monitor the flow of products (if detailed tracking is implemented).</li>
+                </ul>
+                <h3 id="handling-customer-service-issues">Handling Customer Service Issues</h3>
+                <p>In the "Customer Service" section, you can:</p>
+                <ul>
+                    <li><strong>View Top Issues:</strong> See a chart or list of frequently occurring customer problems.</li>
+                    <li><strong>Log New Issues:</strong> Add details of new customer service interactions and issues.</li>
+                    <li><strong>Track Issue Status:</strong> Update the status of ongoing customer service cases.</li>
+                </ul>
+                <h3 id="generating-ai-insights">Generating AI Insights</h3>
+                <p>Navigate to the "AI Insights" section. Here, you can typically:</p>
+                <ul>
+                    <li><strong>Select Data for Analysis:</strong> Choose the dataset or parameters for the AI model to analyze.</li>
+                    <li><strong>Generate Insights:</strong> Click a button to initiate the AI analysis.</li>
+                    <li><strong>View Insights:</strong> The generated insights will be displayed, often in the form of summaries, recommendations, or predictions.</li>
+                </ul>
+            </section>
+
+            <section id="troubleshooting" aria-labelledby="troubleshooting-heading">
+                <h2 id="troubleshooting-heading">7. Troubleshooting</h2>
+                <p>If you encounter issues, consider the following:</p>
+                <ul>
+                    <li><strong>Check the Console:</strong> Look for error messages in your browser's developer console or the terminal where the application is running.</li>
+                    <li><strong>Review Environment Variables:</strong> Ensure all required environment variables are set correctly in <code>.env.local</code>.</li>
+                    <li><strong>Verify Dependencies:</strong> Make sure all project dependencies are installed correctly (<code>npm install</code> or <code>yarn install</code>).</li>
+                    <li><strong>Consult the Repository Issues:</strong> Check the project's issue tracker on the code repository for known bugs or similar problems.</li>
+                </ul>
+            </section>
+
+            <section id="system-architecture-and-vision" aria-labelledby="sys-arch-heading">
+                <h2 id="sys-arch-heading">8. System Architecture and Vision</h2>
+                <p>This section outlines the long-term vision and proposed system architecture for EEEHUB, focusing on its capabilities as an ETL pipeline and centralized e-commerce management tool.</p>
+
+                <h3 id="data-storage-backend">8.1. Data Storage &amp; Backend Processing (Firebase + Python Functions)</h3>
+                <p><strong>Firestore Collections:</strong></p>
+                <ul>
+                    <li><strong><code>products</code> Collection:</strong>
+                        <ul>
+                            <li><code>sku</code> (string, Document ID or unique field): Primary identifier.</li>
+                            <li><code>title</code> (string)</li>
+                            <li><code>bodyHtml</code> (string): Product description.</li>
+                            <li><code>vendor</code> (string)</li>
+                            <li><code>productCategory</code> (string)</li>
+                            <li><code>type</code> (string)</li>
+                            <li><code>tags</code> (array of strings)</li>
+                            <li><code>published</code> (boolean)</li>
+                            <li><code>options</code> (map/array of maps): e.g., <code>[{name: "Color", value: "Red"}, {name: "Size", value: "M"}]</code></li>
+                            <li><code>grams</code> (number)</li>
+                            <li><code>inventoryPolicy</code> (string)</li>
+                            <li><code>fulfillmentService</code> (string)</li>
+                            <li><code>requiresShipping</code> (boolean)</li>
+                            <li><code>taxable</code> (boolean)</li>
+                            <li><code>barcode</code> (string)</li>
+                            <li><code>imageSrc</code> (array of strings/URLs): URLs to product images (ideally in Firebase Storage).</li>
+                            <li><code>imageAltText</code> (array of strings)</li>
+                            <li><code>costPerItem</code> (number)</li>
+                            <li><code>priceMexico</code> (number)</li>
+                            <li><code>compareAtPriceMexico</code> (number)</li>
+                            <li><code>priceInternational</code> (number)</li>
+                            <li><code>compareAtPriceInternational</code> (number)</li>
+                            <li><code>status</code> (string): e.g., 'active', 'archived', 'draft'.</li>
+                            <li><code>metafields</code> (map): For custom/generic data, e.g., <code>metafields.googleShopping.customProduct</code>, <code>metafields.shopify.ageGroup</code>.</li>
+                            <li><code>reorderPoint</code> (number): Threshold for reorder alerts.</li>
+                            <li><code>forecastedDemand</code> (number): Calculated by AI.</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>inventoryMovements</code> Collection:</strong>
+                        <ul>
+                            <li><code>productId</code> (string, reference to <code>products</code> document ID)</li>
+                            <li><code>type</code> (string: 'sale', 'receipt', 'adjustment', 'return', 'physical_count')</li>
+                            <li><code>quantity</code> (number, integer, can be negative for sales/adjustments)</li>
+                            <li><code>timestamp</code> (Firestore Timestamp)</li>
+                            <li><code>source</code> (string: 'Shopify Sale', 'Manual Adjustment', 'CSV Import', 'Private API Receipt', 'Meta Sale')</li>
+                            <li><code>orderId</code> (string, if applicable)</li>
+                            <li><code>locationId</code> (string, if multi-location)</li>
+                            <li><code>reason</code> (string, for adjustments/returns)</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>currentStock</code> Collection (Optimized for fast reads):</strong>
+                        <ul>
+                            <li><code>productId</code> (string, Document ID or unique field, maps to <code>products.sku</code>)</li>
+                            <li><code>quantity</code> (number, integer)</li>
+                            <li><code>lastUpdated</code> (Firestore Timestamp)</li>
+                            <li><code>locationId</code> (string, if multi-location)</li>
+                        </ul>
+                    </li>
+                     <li><strong><code>salesData</code> Collection (For richer Shopify/Meta insights):</strong>
+                        <ul>
+                            <li><code>orderId</code> (string, Document ID or unique field)</li>
+                            <li><code>sourcePlatformId</code> (string, e.g., Shopify Order ID)</li>
+                            <li><code>customerDetails</code> (map)</li>
+                            <li><code>lineItems</code> (array of maps: <code>productId</code>, <code>quantity</code>, <code>price</code>, <code>title</code>)</li>
+                            <li><code>totalPrice</code> (number)</li>
+                            <li><code>currency</code> (string)</li>
+                            <li><code>timestamp</code> (Firestore Timestamp)</li>
+                            <li><code>source</code> (string: 'Shopify', 'Meta Shop', etc.)</li>
+                            <li><code>fulfillmentStatus</code> (string)</li>
+                            <li><code>financialStatus</code> (string)</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>insights</code> Collection (Pre-calculated for dashboards):</strong>
+                         <ul>
+                            <li><code>insightId</code> (string, e.g., <code>daily_summary_YYYY-MM-DD</code>, <code>product_performance_SKU</code>)</li>
+                            <li><code>calculationDate</code> (Firestore Timestamp)</li>
+                            <li><code>data</code> (map): Containing metrics like <code>inventoryTurnover</code>, <code>daysOfSupply</code>, <code>bestSellingProducts</code>, <code>slowMovingItems</code>, <code>profitMargins</code>, <code>reorderAlerts</code>, <code>stockDiscrepancies</code>.</li>
+                            <li>Updated by scheduled Firebase Functions.</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>apiCredentials</code> Collection (Secured - Not directly accessible by frontend):</strong>
+                        <ul>
+                            <li><code>provider</code> (string: 'shopify', 'meta', 'private_api_X')</li>
+                            <li><code>credentials</code> (map): Encrypted API keys, tokens, etc.</li>
+                            <li><code>userId</code> (string): To associate credentials with a user/account.</li>
+                            <li>Accessed only by secure Firebase Functions.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 id="etl-backend">8.2. ETL Backend (Python Firebase Functions)</h3>
+                <p>Python Firebase Functions will handle data extraction, transformation, and loading:</p>
+                <ul>
+                    <li><strong><code>shopify_data_extractor</code> Function:</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Scheduler (periodic) and Shopify Webhooks (real-time for orders, fulfillment).</li>
+                            <li><strong>Action:</strong> Connects to Shopify Admin API.
+                                <ul>
+                                    <li>Pulls orders, updates <code>inventoryMovements</code>, <code>currentStock</code>, and <code>salesData</code>.</li>
+                                    <li>Pulls products (initial sync & updates), updates <code>products</code> collection.</li>
+                                    <li>Handles pagination and rate limits.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                     <li><strong><code>meta_insights_extractor</code> Function:</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Scheduler (daily).</li>
+                            <li><strong>Action:</strong> Connects to Meta Graph API.
+                                <ul>
+                                    <li>Fetches insights on product posts, engagement, clicks to shop.</li>
+                                    <li>Stores data in <code>salesData</code> (if direct sales) or a dedicated <code>metaProductInsights</code> collection linked to <code>products</code>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong><code>private_api_extractor</code> Function (for specific supplier/warehouse APIs):</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Scheduler.</li>
+                            <li><strong>Action:</strong> Connects to specified private APIs.
+                                <ul>
+                                    <li>Parses inventory receipts or product master data.</li>
+                                    <li>Updates <code>inventoryMovements</code>, <code>currentStock</code>, and <code>products</code>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong><code>csv_processor</code> Function:</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Storage Trigger (on new CSV upload to a designated bucket).</li>
+                            <li><strong>Action:</strong> Uses <code>pandas</code> to read CSV.
+                                <ul>
+                                    <li>Maps CSV columns to Firestore <code>products</code> fields, including custom metafields.</li>
+                                    <li>Handles product updates or creates new products based on SKU.</li>
+                                    <li>Processes <code>Variant Inventory Qty</code> into <code>inventoryMovements</code> and updates <code>currentStock</code>.</li>
+                                    <li><strong>Image Handling:</strong> If <code>Image Src</code> in CSV are external URLs, downloads images, uploads them to Firebase Storage, and stores the Firebase Storage URL in <code>products.imageSrc</code>. Flags products needing images if <code>Image Src</code> is empty.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                     <li><strong><code>google_sheet_processor</code> Function:</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Scheduler (hourly or on-demand).</li>
+                            <li><strong>Action:</strong> Uses <code>gspread</code> or Google API client to read a designated Google Sheet for manual adjustments (SKU, Quantity, Type, Reason).
+                                <ul>
+                                    <li>Creates <code>inventoryMovements</code> and updates <code>currentStock</code>.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong><code>insights_calculator</code> Function:</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> Cloud Scheduler (e.g., daily or every few days).</li>
+                            <li><strong>Action:</strong> Calculates key metrics:
+                                <ul>
+                                    <li>Inventory Turnover.</li>
+                                    <li>Days of Supply.</li>
+                                    <li>Best-Selling / Slow-Moving Items.</li>
+                                    <li><strong>Reorder Alerts:</strong> Compares <code>currentStock.quantity</code> with <code>products.reorderPoint</code> and <code>products.forecastedDemand</code> / <code>daysOfSupply</code>.</li>
+                                    <li>Profit Margins per Product.</li>
+                                    <li>Stock Accuracy Discrepancies (requires baseline from <code>physical_count</code> movements or AI prediction).</li>
+                                </ul>
+                            </li>
+                            <li>Stores results in the <code>insights</code> collection.</li>
+                        </ul>
+                    </li>
+                    <li><strong><code>ai_demand_forecaster</code> Function (using Genkit):</strong>
+                        <ul>
+                            <li><strong>Trigger:</strong> On-demand (e.g., from frontend for a specific product) or scheduled (for batch forecasting).</li>
+                            <li><strong>Action:</strong>
+                                <ul>
+                                    <li>Takes product details (SKU, category, type, description, historical sales velocity if available).</li>
+                                    <li>Uses a Genkit flow to predict <code>forecastedDemand</code>.</li>
+                                    <li>Updates the <code>forecastedDemand</code> field in the <code>products</code> collection.</li>
+                                </ul>
+                            </li>
+                            <li>Can also be used to suggest an optimal <code>reorderPoint</code>.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 id="frontend-application">8.3. Frontend Application (Next.js/React - Current Stack)</h3>
+                <p>The existing Next.js application will be expanded to support these features:</p>
+                <ul>
+                    <li><strong>Authentication:</strong> Firebase Auth.</li>
+                    <li><strong>Dashboard:</strong> Enhanced with data from the <code>insights</code> collection.</li>
+                    <li><strong>Product Management (within Inventory section):</strong>
+                        <ul>
+                            <li>Detailed product view/edit page showing all fields from the <code>products</code> collection (including custom metafields).</li>
+                            <li>Forms to manually edit product details, including <code>reorderPoint</code>, <code>costPerItem</code>, prices.</li>
+                            <li>Interface to upload/manage product images (linked to Firebase Storage).</li>
+                            <li>Filtered view for products needing image uploads.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data Ingestion Hub (Data Import section):</strong>
+                        <ul>
+                            <li>Secure forms for admin users to input API credentials (posts to a Firebase Function that saves to <code>apiCredentials</code>).</li>
+                            <li>CSV upload component (already partially implemented).</li>
+                            <li>Interface to trigger Google Sheet sync.</li>
+                            <li>Buttons to manually trigger specific ETL functions (e.g., "Sync Shopify Now").</li>
+                        </ul>
+                    </li>
+                    <li><strong>Reporting:</strong>
+                        <ul>
+                            <li>Downloadable CSV reports generated from the <code>insights</code> collection or direct queries.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Inventory Management:</strong>
+                        <ul>
+                            <li>Displaying current stock levels from <code>currentStock</code>.</li>
+                            <li>Forms for manual stock adjustments (creating <code>inventoryMovement</code> records).</li>
+                            <li>Displaying reorder alerts.</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3 id="key-features-benefits">8.4. Key Features and User Benefits</h3>
+                <ul>
+                    <li><strong>Centralized Data:</strong> Aggregates data from multiple e-commerce platforms (Shopify, Meta, etc.) and CSVs into one place.</li>
+                    <li><strong>Unified Inventory Management:</strong> Track and (eventually) manage inventory across all channels from EEEHUB.</li>
+                    <li><strong>Data-Driven Insights:</strong>
+                        <ul>
+                            <li>AI-powered demand forecasting and reorder point suggestions.</li>
+                            <li>Analysis of sales performance, inventory turnover, profit margins.</li>
+                            <li>Identification of best/slow-selling products.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Streamlined Operations:</strong>
+                        <ul>
+                            <li>Automated data extraction.</li>
+                            <li>Reduced manual data entry and reconciliation.</li>
+                            <li>Proactive alerts for reordering and potential stock issues.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Improved Decision Making:</strong> Provides comprehensive analytics to help users optimize pricing, marketing, and purchasing strategies.</li>
+                </ul>
+                <p>This architecture aims to leverage Firebase for its backend services and scalability, Python for robust data processing in Firebase Functions, and Next.js/React for a dynamic and user-friendly frontend.</p>
+            </section>
+
+            <section id="contribution" aria-labelledby="contribution-heading">
+                <h2 id="contribution-heading">9. Contribution</h2>
+                <p>If you are interested in contributing to EEEHUB, please refer to the <code>CONTRIBUTING.md</code> file in the repository (if it exists) for guidelines on how to submit bug reports, feature requests, and pull requests.</p>
+            </section>
+
+            <section id="license" aria-labelledby="license-heading">
+                <h2 id="license-heading">10. License</h2>
+                <p>The EEEHUB application is released under the [Specify License, e.g., MIT License]. See the <code>LICENSE</code> file in the repository for more details.</p>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Smooth scroll for TOC links using event delegation for efficiency
+        document.addEventListener('DOMContentLoaded', () => {
+            const tocNav = document.querySelector('#toc-container nav');
+            if (tocNav) {
+                tocNav.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = e.target.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                            // Optional: Update URL hash without page jump for better history
+                            setTimeout(() => {
+                                if (history.pushState) {
+                                    history.pushState(null, null, targetId);
+                                } else {
+                                    location.hash = targetId;
+                                }
+                            }, 400); 
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
